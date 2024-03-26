@@ -10,7 +10,7 @@ interface FormFieldProps {
   disabled?: boolean;
   inputType?: React.HTMLInputTypeAttribute | undefined;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  value: string | undefined;
   inputRef?: RefCallBack;
 }
 

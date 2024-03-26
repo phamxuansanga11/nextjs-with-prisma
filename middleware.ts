@@ -1,35 +1,42 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import NextAuth from "next-auth";
+import { publicRoutes, apiAuthPrefix, PATH_NAME } from "@/routes";
 
-const authRoutes: string[] = ["/auth/login", "/auth/register"];
-const privateRoutes: string[] = ["/dashboard", "/"];
+import authConfig from "@/auth.config";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  // const isLogged: boolean = true;
-  // const { nextUrl } = request;
+const { auth } = NextAuth(authConfig);
 
-  // if (nextUrl.pathname == "/" && isLogged) {
-  //   return NextResponse.redirect(new URL("/home", request.url));
-  // }
+// Or like this if you need to do something here.
+export default auth((req) => {
+  const isLogged = !!req.auth;
 
-  // if (
-  //   privateRoutes.some((route) => route.startsWith(nextUrl.pathname)) &&
-  //   !isLogged
-  // ) {
-  //   return NextResponse.redirect(new URL("/auth/login", request.url));
-  // }
+  const { pathname } = req.nextUrl;
 
-  // if (
-  //   authRoutes.some((route) => route.startsWith(nextUrl.pathname)) &&
-  //   isLogged
-  // ) {
-  //   return NextResponse.redirect(new URL("/dashboard", request.url));
-  // }
+  console.log("isLogged:", isLogged);
+  const isAuthRoute = pathname.startsWith(apiAuthPrefix);
+  const isPublicRoute = publicRoutes.includes(pathname);
+
+  if (isAuthRoute) {
+    if (isLogged) {
+      return NextResponse.redirect(
+        new URL(PATH_NAME.DASHBOARD, req.nextUrl.origin)
+      );
+    } else {
+      return NextResponse.next();
+    }
+  }
+
+  if (!isPublicRoute) {
+    if (!isLogged) {
+      return NextResponse.redirect(
+        new URL(PATH_NAME.LOGIN, req.nextUrl.origin)
+      );
+    }
+  }
   return NextResponse.next();
-}
+});
 
-// See "Matching Paths" below to learn more
+// Read more: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
