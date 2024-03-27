@@ -22,7 +22,7 @@ export const login = async (data: UserData) => {
     console.log("signIn....");
     await signIn("credentials", {
       email: user.email,
-      password: user.password,
+      password: password,
       redirectTo: "/dashboard",
     });
   } catch (error) {

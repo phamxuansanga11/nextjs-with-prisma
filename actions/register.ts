@@ -7,9 +7,9 @@ import bcrypt from "bcrypt";
 
 export const createUser = async (data: UserData) => {
   console.log("data in server:", data);
-  const { email, fullName, password } = data;
-  if (!email || !fullName || !password) {
-    return { error: "email, password and fullName can not be null!" };
+  const { email, name, password } = data;
+  if (!email || !name || !password) {
+    return { error: "email, password and name can not be null!" };
   }
 
   const userExists = await getUserByEmail(email);

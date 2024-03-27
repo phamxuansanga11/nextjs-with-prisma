@@ -10,27 +10,27 @@ import { getUserByEmail } from "./services/getUserByEmail";
 export default {
   providers: [
     Credentials({
-      async authorize(credentials, request) {
+      async authorize(credentials) {
         const { email, password } = credentials;
-        console.log("credentials:", credentials);
 
         const user = await getUserByEmail(email as string);
-
-        console.log("user:", user);
 
         if (!user || !user.password) {
           return null;
         }
 
         const passwordMatch = await bcrypt.compare(
-          `${password}`,
-          `${user.password}`
+          password as string,
+          user.password
         );
 
-        console.log("passwordMatch:", passwordMatch);
-
         if (passwordMatch) {
-          return user as any;
+          return {
+            email: user.email,
+            name: user.name,
+            avatar: user.avatar,
+            role: user.role,
+          };
         }
 
         return null;

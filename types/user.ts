@@ -1,6 +1,12 @@
+export enum UserRole {
+  USER = "USER",
+  ADMIN = "ADMIN",
+}
 export interface UserData {
+  id: number;
   email: string;
-  fullName: string;
+  name: string;
   password?: string;
   avatar?: string;
+  role: UserRole.ADMIN | UserRole.USER;
 }

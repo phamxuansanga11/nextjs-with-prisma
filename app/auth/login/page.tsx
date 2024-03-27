@@ -9,6 +9,7 @@ import { UserData } from "@/types/user";
 import { Tag } from "antd";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 type Status = "error" | "success";
 
@@ -36,13 +37,8 @@ const LoginPage = () => {
     console.log({ data });
 
     const result: any = await login(data);
-
     if (result && result.success) {
-      reset();
-      setFormStatus({
-        status: "success",
-        message: result.success,
-      });
+      toast.success("Đăng nhập thành công!");
     }
     if (result && result.error) {
       setFormStatus({
@@ -108,9 +104,9 @@ const LoginPage = () => {
                 />
               )}
             />
-            {errors.fullName && (
+            {errors.password && (
               <span className="text-red-500 text-sm">
-                {errors.fullName.message}
+                {errors.password.message}
               </span>
             )}
           </div>

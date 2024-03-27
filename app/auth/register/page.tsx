@@ -28,7 +28,7 @@ const RegisterPage = () => {
   } = useForm<UserData>({
     defaultValues: {
       email: "",
-      fullName: "",
+      name: "",
       password: "",
     },
   });
@@ -60,7 +60,7 @@ const RegisterPage = () => {
           <div className="mb-5">
             <Controller
               control={control}
-              name="fullName"
+              name="name"
               rules={{
                 required: {
                   value: true,
@@ -70,7 +70,7 @@ const RegisterPage = () => {
               render={({ field: { ref, onChange, value } }) => (
                 <FormField
                   inputRef={ref}
-                  inputId="fullName"
+                  inputId="name"
                   label="Họ và tên"
                   value={value}
                   onChange={(event) => onChange(event)}
@@ -78,9 +78,9 @@ const RegisterPage = () => {
                 />
               )}
             />
-            {errors.fullName && (
+            {errors.name && (
               <span className="text-red-500 text-sm">
-                {errors.fullName.message}
+                {errors.name.message}
               </span>
             )}
           </div>
@@ -134,9 +134,9 @@ const RegisterPage = () => {
                 />
               )}
             />
-            {errors.fullName && (
+            {errors.password && (
               <span className="text-red-500 text-sm">
-                {errors.fullName.message}
+                {errors.password.message}
               </span>
             )}
           </div>
