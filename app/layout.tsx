@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import "@/src/styles/global.scss";
 import "@/src/styles/tailwind.css";
 import "react-toastify/dist/ReactToastify.css";
+import { ThemeProvider } from "@/providers/theme";
+import Header from "@/src/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +23,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div>{children}</div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          {children}
+        </ThemeProvider>
         <ToastContainer />
       </body>
     </html>
