@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import PageContainer from "@/src/components/PageContainer";
 
 const UploadForm = () => {
   const [file, setFile] = useState<File>();
@@ -39,7 +40,7 @@ const UploadForm = () => {
   };
 
   return (
-    <div className="h-screen">
+    <PageContainer>
       <div className="pt-5 w-full">
         <form
           onSubmit={handleSubmit}
@@ -75,7 +76,7 @@ const UploadForm = () => {
           </Button>
         </form>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

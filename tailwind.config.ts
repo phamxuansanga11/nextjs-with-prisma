@@ -34,6 +34,10 @@ const config = {
       },
       colors: {
         primary: "var(--primary-color)",
+        secondary: "var(--secondary-color)",
+        "text-dark": "var(--text-dark-color)",
+        "background-light": "var(--background-light-color)",
+        "blue-antd-color": "#1677ff",
       },
     },
   },

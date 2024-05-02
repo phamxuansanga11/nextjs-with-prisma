@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
-import { ToastContainer } from "react-toastify";
-import { Inter } from "next/font/google";
-import "@/src/styles/global.scss";
-import "@/src/styles/tailwind.css";
-import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@/providers/theme";
 import Header from "@/src/components/Header";
+import "@/src/styles/global.scss";
+import "@/src/styles/tailwind.css";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          {children}
+          <AntdRegistry>{children}</AntdRegistry>
         </ThemeProvider>
         <ToastContainer />
       </body>

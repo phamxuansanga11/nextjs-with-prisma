@@ -2,6 +2,7 @@
 
 import { login } from "@/actions/login";
 import { PATH_NAME } from "@/routes";
+import axiosService from "@/services/axiosConfig";
 import AuthForm from "@/src/components/AuthForm";
 import ButtonPrimary from "@/src/components/AuthForm/components/ButtonPrimary";
 import FormField from "@/src/components/AuthForm/components/FormField";
@@ -10,6 +11,8 @@ import { Tag } from "antd";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useCookies } from "next-client-cookies";
+import { getToken } from "@/src/utils/myCookies";
 
 type Status = "error" | "success";
 
@@ -32,20 +35,26 @@ const LoginPage = () => {
       password: "",
     },
   });
+  const cookies = useCookies();
 
   const handleLogin: SubmitHandler<UserData> = async (data) => {
     console.log({ data });
-
-    const result: any = await login(data);
-    if (result && result.success) {
-      toast.success("Đăng nhập thành công!");
-    }
-    if (result && result.error) {
-      setFormStatus({
-        status: "error",
-        message: result.error,
+    await axiosService()
+      .then((res) => res)
+      .catch((err) => {
+        throw err;
       });
-    }
+
+    // const result: any = await login(data);
+    // if (result && result.success) {
+    //   toast.success("Đăng nhập thành công!");
+    // }
+    // if (result && result.error) {
+    //   setFormStatus({
+    //     status: "error",
+    //     message: result.error,
+    //   });
+    // }
   };
 
   return (

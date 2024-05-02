@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 
 import type { NextAuthConfig } from "next-auth";
 import { getUserByEmail } from "./services/getUserByEmail";
+import { cookies } from "next/headers";
 
 export default {
   providers: [
@@ -25,6 +26,10 @@ export default {
         );
 
         if (passwordMatch) {
+          cookies().set("accessToken", "my-access-token-123", {
+            httpOnly: true,
+            secure: true,
+          });
           return {
             email: user.email,
             name: user.name,

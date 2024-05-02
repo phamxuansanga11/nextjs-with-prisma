@@ -3,6 +3,9 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --primary-color: #0f172a;
+  --secondary-color: #020617;
+  --background-light-color: #f1f0fa;
+  --text-dark-color: #d7d7d7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,4 +24,14 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.ant-card-body {
+  padding: 14px !important;
+}
+
+.box-shadow-custom {
+  box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 0.15);
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 0.15);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 0.15);
 }

@@ -6,7 +6,6 @@ import { UserData } from "@/types/user";
 import { AuthError } from "next-auth";
 
 export const login = async (data: UserData) => {
-  console.log("data login in server:", data);
   const { email, password } = data;
   if (!email || !password) {
     return { error: "email, password and fullName can not be null!" };

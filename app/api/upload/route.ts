@@ -13,8 +13,6 @@ export async function POST(request: NextRequest) {
   const data = await request.formData();
   const file: File | null = data.get("file") as unknown as File;
 
-  console.log({ file, data });
-
   if (!file) {
     return NextResponse.json({ success: false });
   }
@@ -23,7 +21,7 @@ export async function POST(request: NextRequest) {
   const buffer = Buffer.from(bytes);
 
   // Đường dẫn của thư mục 'upload' trong dự án
-  const uploadDir = join(projectRoot, "src", "uploads");
+  const uploadDir = join(projectRoot, "public", "uploads");
 
   // Tạo đường dẫn hoàn chỉnh của file
   const path = join(uploadDir, file.name);
@@ -31,10 +29,6 @@ export async function POST(request: NextRequest) {
   // Ghi file vào thư mục upload
   await writeFile(path, buffer);
   console.log(`File được ghi vào ${path}`);
-
-  //   const path = join("/", "/image-test", file.name);
-  //   const newFile = await writeFile(path, buffer);
-  //   console.log(`open ${newFile} to see uploaded file`);
 
   return NextResponse.json({ success: true });
 }
